@@ -1,0 +1,28 @@
+{
+  "name": "perms",
+  "version": "1.0.0",
+  "description": "== README",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server -d --hot --inline --display-reasons --display-error-details --history-api-fallback --progress --colors --port 8080 --output-public-path http://127.0.0.1:8080/",
+    "build": "webpack",
+    "lint": "eslint app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.5.4",
+    "babel": "^5.4.7",
+    "babel-core": "^5.4.7",
+    "babel-eslint": "^3.1.23",
+    "babel-loader": "^5.2.2",
+    "bows": "^1.4.3",
+    "color-hash": "^1.0.3",
+    "eslint": "^0.22.1",
+    "topojson": "^1.6.19",
+    "webpack": "^1.9.10"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^1.9.0"
+  }
+}
