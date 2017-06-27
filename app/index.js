@@ -24,16 +24,17 @@ axios.get('data/perms.json').then((response) => {
 
     const layerGroup = layerGroups[distance];
 
-    axios.get(route.topoJson).then((topoJsonResponse) => {
-      const topoJson = topoJsonResponse.data;
-      const geoJson = topojson.feature(topoJson, topoJson.objects.stdin);
-      const layer = window.L.geoJson(
-        geoJson,
-        {style: {color: colorHash.hex(route.name)}}
-      ).bindPopup(`<a target='_blank' href='${route.link}>${route.name}</a><br/>${route.description}`);
-      layerGroup.addLayer(layer);
-    }).catch((error) => {
-      log(error);
+    route.topoJson.forEach(topo => {
+      axios.get(topo).then((topoJsonResponse) => {
+        const topoJson = topoJsonResponse.data;
+        const geoJson = topojson.feature(topoJson, topoJson.objects[Object.keys(topoJson.objects)[0]]);
+        console.log(route)
+        const layer = window.L.geoJson(
+          geoJson,
+          {style: {color: colorHash.hex(route.name)}}
+        ).bindPopup(`<a href="${route.links[0]}">${route.name}</a><br/>${route.description}`);
+        layerGroup.addLayer(layer);
+      });
     });
   });
 
