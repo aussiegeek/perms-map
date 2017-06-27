@@ -19,7 +19,7 @@
     "bows": "^1.4.3",
     "color-hash": "^1.0.3",
     "eslint": "^0.22.1",
-    "topojson": "^1.6.19",
+    "topojson-client": "^2.1.0",
     "webpack": "^1.9.10"
   },
   "devDependencies": {

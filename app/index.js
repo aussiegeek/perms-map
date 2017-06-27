@@ -3,7 +3,7 @@ import bows from 'bows';
 const log = bows('index');
 import ColorHash from 'color-hash';
 const colorHash = new ColorHash();
-import topojson from 'topojson';
+import * as topojson from 'topojson-client';
 
 window.L.mapbox.accessToken = 'pk.eyJ1IjoidGhldHVyaW5nbWFjaGluZSIsImEiOiIxMjljNzFlOWNiMjZkZWIyNjYxMjViN2Q5NzRhYWRjYSJ9.-LqvR7mvElcVL3rSkB11mQ';
 
