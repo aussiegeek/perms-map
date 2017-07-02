@@ -28,7 +28,7 @@ axios.get('data/perms.json').then((response) => {
         const layer = window.L.geoJson(
           geoJson,
           {style: {color: colorHash.hex(route.name)}}
-        ).bindPopup(`<a href="${route.links[0]}">${route.name}</a><br/>${route.description}`)
+        ).bindPopup(`<a target="_blank" href="${route.links[0]}">${route.name}</a><br/>${route.description}`)
         layerGroup.addLayer(layer)
       })
     })
