@@ -12,23 +12,19 @@ const map = window.L.mapbox.map('map', 'mapbox.streets')
 
 axios.get('data/perms.json').then((response) => {
   const layerGroups = {}
+  response.data
+    .map(route => route.distance)
+    .filter((v, i, a) => a.indexOf(v) === i)
+    .sort((a,b) => Number.parseInt(a) - Number.parseInt(b))
+    .forEach(distance => layerGroups[distance] = window.L.layerGroup().addTo(map))
+
   response.data.forEach((route) => {
-    let distance = route.distance
-    if (route.distance === '') {
-      distance = 'Unknown'
-    }
-
-    if (layerGroups[distance] === undefined) {
-      layerGroups[distance] = window.L.layerGroup().addTo(map)
-    }
-
-    const layerGroup = layerGroups[distance]
+    const layerGroup = layerGroups[route.distance]
 
     route.topoJson.forEach(topo => {
       axios.get(topo).then((topoJsonResponse) => {
         const topoJson = topoJsonResponse.data
         const geoJson = topojson.feature(topoJson, topoJson.objects[Object.keys(topoJson.objects)[0]])
-        console.log(route)
         const layer = window.L.geoJson(
           geoJson,
           {style: {color: colorHash.hex(route.name)}}
