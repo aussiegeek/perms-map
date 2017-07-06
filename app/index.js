@@ -15,12 +15,16 @@ axios.get('data/perms.json').then((response) => {
   response.data
     .map(route => route.distance)
     .filter((v, i, a) => a.indexOf(v) === i)
-    .sort((a,b) => Number.parseInt(a) - Number.parseInt(b))
-    .forEach(distance => layerGroups[distance] = window.L.layerGroup().addTo(map))
+    .sort((a, b) => Number.parseInt(a) - Number.parseInt(b))
+    .forEach(distance => { layerGroups[distance] = window.L.layerGroup().addTo(map) })
+
+  response.data
+    .map(route => route.region)
+    .filter((v, i, a) => a.indexOf(v) === i)
+    .sort()
+    .forEach(region => { layerGroups[region] = window.L.layerGroup().addTo(map) })
 
   response.data.forEach((route) => {
-    const layerGroup = layerGroups[route.distance]
-
     route.topoJson.forEach(topo => {
       axios.get(topo).then((topoJsonResponse) => {
         const topoJson = topoJsonResponse.data
@@ -29,7 +33,8 @@ axios.get('data/perms.json').then((response) => {
           geoJson,
           {style: {color: colorHash.hex(route.name)}}
         ).bindPopup(`<a target="_blank" href="${route.links[0]}">${route.name}</a><br/>${route.description}`)
-        layerGroup.addLayer(layer)
+        layerGroups[route.distance].addLayer(layer)
+        layerGroups[route.region].addLayer(layer)
       })
     })
   })
