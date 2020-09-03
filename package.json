@@ -23,6 +23,6 @@
   },
   "devDependencies": {
     "standard": "^10.0.2",
-    "webpack-dev-server": "^1.9.0"
+    "webpack-dev-server": "^3.1.11"
   }
 }
